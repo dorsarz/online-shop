@@ -9,9 +9,9 @@ public boolean passwordValidate(String pass){
     }
 
 }
-    public boolean usernameValidate(String pass){
-        String password="parnian.dorsa84";
-        if (pass.equals(password)){
+    public boolean usernameValidate(String user){
+        String username="onlineshop.123";
+        if (user.equals(username)){
             return true;
         }
         else {
