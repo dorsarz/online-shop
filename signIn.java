@@ -26,14 +26,23 @@ public class signIn {
          backPanel.setBackground(Color.lightGray);
          signInPanel.add(backPanel);
 
-         JLabel nameLabel=new JLabel("Full Name:");
-         nameLabel.setBounds(40,10,200,100);
-         nameLabel.setFont(font);
-         backPanel.add(nameLabel);
+         JLabel firstNameLabel=new JLabel("First name:");
+         firstNameLabel.setBounds(40,10,200,50);
+         firstNameLabel.setFont(font);
+         backPanel.add(firstNameLabel);
 
-         JTextField nameField=new JTextField();
-         nameField.setBounds(200,5,250,100);
-         backPanel.add(nameField);
+         JTextField firstNameField=new JTextField();
+         firstNameField.setBounds(200,5,250,50);
+         backPanel.add(firstNameField);
+
+         JLabel lastNameLabel=new JLabel("Last Name: ");
+         lastNameLabel.setBounds(40,60,200,50);
+         lastNameLabel.setFont(font);
+         backPanel.add(lastNameLabel);
+
+         JTextField lastNameField=new JTextField();
+         lastNameField.setBounds(200,55,250,50);
+         backPanel.add(lastNameField);
 
          JLabel username=new JLabel("User Name: ");
          username.setBounds(40,110,200,100);
@@ -73,12 +82,12 @@ public class signIn {
 
          JButton enter=new JButton("Enter");
          enter.setFont(font);
-         enter.setBounds(200,510,250,80);
+         enter.setBounds(200,510,250,30);
          backPanel.add(enter);
 
          JButton back=new JButton("Back");
          back.setFont(font);
-         back.setBounds(40,510,150,80);
+         back.setBounds(40,510,150,30);
          backPanel.add(back);
          back.addActionListener(new ActionListener() {
              @Override
@@ -89,7 +98,7 @@ public class signIn {
                  frame.repaint();
              }
          });
-         
+
          frame.add(signInPanel);
          frame.setLayout(null);
          frame.setVisible(true);
