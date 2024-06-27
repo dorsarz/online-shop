@@ -3,10 +3,16 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Manager  extends JFrame {
+public class Manager extends JFrame {
+    private JFrame frame;
+    private JPanel mainPanel;
+    public Manager(JFrame frame,JPanel mainPanel){
+        this.frame=frame;
+        this.mainPanel=mainPanel;
+    }
     public void setFrame(){
-        JFrame managerFrame = new JFrame();
-        managerFrame.setSize(1000,1000);
+        frame.revalidate();
+        frame.repaint();
         JPanel panel=new JPanel();
         panel.setLayout(null);
         panel.setBounds(0,0,1000,1000);
@@ -44,11 +50,11 @@ public class Manager  extends JFrame {
         enterBut.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            String pass= passwordText.getText();
-            String username= passwordText.getText();
-            ManagerValidator managerValidator=new ManagerValidator();
-             boolean password=managerValidator.passwordValidate(pass);
-             boolean user=managerValidator.passwordValidate(username);
+                String pass= passwordText.getText();
+                String username= passwordText.getText();
+                ManagerValidator managerValidator=new ManagerValidator();
+                boolean password=managerValidator.passwordValidate(pass);
+                boolean user=managerValidator.passwordValidate(username);
 
             }
         });
@@ -61,13 +67,17 @@ public class Manager  extends JFrame {
         backBut.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                frame.remove(panel);
+                frame.repaint();
+                frame.revalidate();
+                frame.add(mainPanel);
 
             }
         });
 
         panel.add(panelBack);
-        managerFrame.setVisible(true);
-        managerFrame.add(panel);
+       frame.setVisible(true);
+       frame.add(panel);
 
     }
 
