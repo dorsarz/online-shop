@@ -1,10 +1,19 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Login {
-    public void setLoginpanel(){
-        JFrame userFrame = new JFrame();
-        userFrame.setSize(1000,1000);
+     private JFrame frame;
+     private JPanel mainPanel;
+
+     public Login(JFrame frame,JPanel mainPanel){
+         this.frame=frame;
+         this.mainPanel=mainPanel;
+     }
+    public void setLoginPanel(){
+        frame.repaint();
+        frame.revalidate();
         JPanel panel=new JPanel();
         panel.setLayout(null);
         panel.setBounds(0,0,1000,1000);
@@ -45,8 +54,18 @@ public class Login {
         backBut.setBounds(75,250,100,30);
         backBut.setFont(font);
         panelBack.add(backBut);
+        backBut.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               frame.remove(panel);
+               frame.add(mainPanel);
+               frame.repaint();
+               frame.revalidate();
+            }
+        });
+
         panel.add(panelBack);
-        userFrame.setVisible(true);
-        userFrame.add(panel);
+        frame.setVisible(true);
+        frame.add(panel);
     }
 }
