@@ -55,7 +55,26 @@ public class Manager extends JFrame {
                 ManagerValidator managerValidator=new ManagerValidator();
                 boolean password=managerValidator.passwordValidate(pass);
                 boolean user=managerValidator.passwordValidate(username);
+                   if (password&&user){
 
+             }
+             else {
+                 if (!password){
+                     JLabel error=new JLabel("Your Password is wrong!");
+                     error.setBounds(200,280,300,80);
+                     panelBack.add(error);
+                     panelBack.revalidate();
+                     panelBack.repaint();
+                 }
+                 if ((!user)){
+                     JLabel error=new JLabel("Your Username is wrong!");
+                     error.setBounds(200,300,300,80);
+                     panelBack.add(error);
+                     panelBack.revalidate();
+                     panelBack.repaint();
+                 }
+
+             }
             }
         });
         panelBack.add(enterBut);
