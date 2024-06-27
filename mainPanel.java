@@ -23,6 +23,14 @@ public class mainPanel extends JFrame{
         managerButton.setFont(font);
         managerButton.setBounds(340,250,300,100);
         mainPanel.add(managerButton);
+        managerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Manager manager=new Manager(frame,mainPanel);
+                frame.remove(mainPanel);
+                manager.setFrame();
+            }
+        });
 
         JButton userButton=new JButton("LOG IN AS USER");
         userButton.setFont(font);
@@ -31,11 +39,14 @@ public class mainPanel extends JFrame{
         userButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Login login=new Login(frame,mainPanel);
+                frame.remove(mainPanel);
+                login.setLoginPanel();
 
             }
         });
 
-        JButton signIn=new JButton("SIGN IN");
+        JButton signIn=new JButton("SIGN UP");
         signIn.setFont(font);
         signIn.setBounds(340,450,300,100);
         mainPanel.add(signIn);
