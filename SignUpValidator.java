@@ -1,5 +1,7 @@
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
+import javax.swing.*;
+import java.io.*;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
@@ -60,8 +62,31 @@ public class SignUpValidator {
         }
         else {return false;}
     }
-    public boolean usernamerepeat(String name){
-        return true;
+    public boolean usernamerepeat(String name, File file, JTextField usernameField){
+        boolean flag=true;
+        try {
+            FileReader reader=new FileReader(file);
+            BufferedReader bufferedReader=new BufferedReader(reader);
+            String line=bufferedReader.readLine();
+            while (line!=null){
+                String[] splitInformation=line.split(":");
+                if(usernameField.getText().equals(splitInformation[2])){
+                    flag=false;
+                }
+                line = bufferedReader.readLine();
+
+            }
+        } catch (FileNotFoundException ex) {
+            throw new RuntimeException(ex);
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+        if (flag){
+            return  true;
+        }
+        else {
+            return false;
+        }
     }
     public boolean passwordlength(int name){
         int min=8;int max=25;
