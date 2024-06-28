@@ -2,15 +2,17 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 public class Login {
-     private JFrame frame;
-     private JPanel mainPanel;
-
-     public Login(JFrame frame,JPanel mainPanel){
-         this.frame=frame;
-         this.mainPanel=mainPanel;
-     }
+    private JFrame frame;
+    private JPanel mainPanel;
+    private File file;
+    public Login(JFrame frame, JPanel mainPanel, File file){
+        this.frame=frame;
+        this.mainPanel=mainPanel;
+        this.file=file;
+    }
     public void setLoginPanel(){
         frame.repaint();
         frame.revalidate();
@@ -49,6 +51,32 @@ public class Login {
         enterBut.setFont(font);
         enterBut.setBounds(200,250,200,30);
         enterBut.setFont(font);
+        enterBut.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Font errorFont = new Font("font", Font.ITALIC, 10);
+                String pass=passwordText.getText();
+                String username=usernameText.getText();
+                LoginValidator login=new LoginValidator();
+                boolean ispassCorrect=login.validPassword(pass,file,username);
+                if(ispassCorrect){
+                    Shop shop=new Shop();
+                    frame.remove(panel);
+                    shop.main();
+                    frame.repaint();
+                    frame.revalidate();
+                }
+                else {
+                    JLabel error = new JLabel("Your password is wrong!");
+                    error.setBounds(289,173,200,30);
+                    error.setFont(errorFont);
+                    panelBack.add(error);
+                    panelBack.repaint();
+                    panelBack.revalidate();
+                }
+
+            }
+        });
         panelBack.add(enterBut);
         JButton backBut=new JButton("Back");
         backBut.setBounds(75,250,100,30);
@@ -57,10 +85,10 @@ public class Login {
         backBut.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               frame.remove(panel);
-               frame.add(mainPanel);
-               frame.repaint();
-               frame.revalidate();
+                frame.remove(panel);
+                frame.add(mainPanel);
+                frame.repaint();
+                frame.revalidate();
             }
         });
 
