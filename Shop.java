@@ -3,14 +3,17 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 
- public class Shop{
-   private ArrayList<String> userInformation=new ArrayList<>();
-   public Shop(){
-
-   }
-    public  static void main(String[] args) {
+public class Shop{
+    private  String[]user=new String[1000];
+    private File file;
+    Shop(String[]user,File file){
+        this.user=user;
+        this.file=file;
+    }
+    public   void main() {
         SwingUtilities.invokeLater(() -> {
             Font font=new Font("font",Font.BOLD,25);
             JFrame frame = new JFrame("online shop");
@@ -96,6 +99,15 @@ import java.util.ArrayList;
             settingPanel.setBackground(Color.LIGHT_GRAY);
             settingPanel.setLayout(new GridLayout(0,1,5,5));
             JButton profileButton=new JButton("Profile");
+            profileButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    frame.remove(mainPanel);
+                    Profile profile=new Profile(frame,user,file);
+                    frame.repaint();
+                    frame.revalidate();
+                }
+            });
             settingPanel.add(profileButton);
             JButton shoppingBox=new JButton("Shopping Box");
             settingPanel.add(shoppingBox);
@@ -124,6 +136,7 @@ import java.util.ArrayList;
         });
     }
 }
+
 
 
 
