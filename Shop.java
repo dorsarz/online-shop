@@ -1,6 +1,8 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Shop{
     public  static void main(String[] args) {
@@ -11,22 +13,23 @@ public class Shop{
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
             JPanel mainPanel = new JPanel(new BorderLayout());
-
-
             JPanel topPanel = new JPanel();
+            JPanel shopBoxPanel=new JPanel();
+            shopBoxPanel.setLayout(null);
             topPanel.setBackground(Color.LIGHT_GRAY);
-            JLabel title= new JLabel("Online Shop");
+            JLabel title= new JLabel("let's start shop");
             title.setFont(font);
             topPanel.add(title);
 
             JPanel scrollablePanel = new JPanel();
-            scrollablePanel.setLayout(new GridLayout(0,2,10,10));
+            scrollablePanel.setLayout(new GridLayout(0,1,10,10));
 
-            ImageIcon imageIcon=new ImageIcon("/Users/dorsarezaei/IdeaProjects/last project/src/images");
-            JButton button=new JButton(imageIcon+"first");
+            ImageIcon imageIcon=new ImageIcon("IMG_1767.jpg");
+            JButton button=new JButton(imageIcon);
+
             scrollablePanel.add(button);
 
-            for (int i = 0; i < 49; i++) {
+            for (int i = 0; i <3; i++) {
                 scrollablePanel.add(new JButton("Item " + (i + 1)));
             }
             JPanel settingPanel=new JPanel();
@@ -36,6 +39,16 @@ public class Shop{
             settingPanel.add(profileButton);
             JButton shoppingBox=new JButton("Shopping Box");
             settingPanel.add(shoppingBox);
+            shoppingBox.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    mainPanel.remove(scrollablePanel);
+                    mainPanel.add(shopBoxPanel, BorderLayout.CENTER);
+                    mainPanel.repaint();
+                    mainPanel.revalidate();
+
+                }
+            });
             JButton contactUs=new JButton("Contact with us");
             settingPanel.add(contactUs);
 
