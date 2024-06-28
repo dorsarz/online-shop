@@ -2,8 +2,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
 public class mainPanel extends JFrame{
+    File file=new File("information.txt");
     public void shopGUI(){
         JFrame frame=new JFrame("online shop");
         Dimension framesize=new Dimension(1000,1000);
@@ -39,7 +42,7 @@ public class mainPanel extends JFrame{
         userButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Login login=new Login(frame,mainPanel);
+                Login login=new Login(frame,mainPanel,file);
                 frame.remove(mainPanel);
                 login.setLoginPanel();
 
@@ -54,9 +57,13 @@ public class mainPanel extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                signIn signIn=new signIn(frame,mainPanel);
+                signIn signIn=new signIn(frame,mainPanel,file);
                 frame.remove(mainPanel);
-                signIn.signInGUI();
+                try {
+                    signIn.signInGUI();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
 
