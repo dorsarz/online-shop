@@ -9,6 +9,7 @@ import java.util.Scanner;
 public class signIn {
     private JFrame frame;
     private JPanel mainPanel;
+    private File file;
     JPanel boxerror=new JPanel();
     JPanel backPanel=new JPanel();
     JTextField lastNameField=new JTextField();
@@ -18,10 +19,10 @@ public class signIn {
     JTextField numberField=new JTextField();
     JTextField addressField=new JTextField();
     ArrayList<String> userInformation=new ArrayList<>();
-    File file=new File("information.txt");
-    public signIn(JFrame frame,JPanel mainPanel){
+    public signIn(JFrame frame,JPanel mainPanel,File file){
         this.frame=frame;
         this.mainPanel=mainPanel;
+        this.file=file;
     }
     public void signInGUI() throws IOException {
         frame.repaint();
