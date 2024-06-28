@@ -110,10 +110,13 @@ public class signIn {
                 boxerror.setLayout(null);
                 boxerror.setBackground(Color.lightGray);
                 boxerror.setBounds(400, 0, 300, 600);
-                setFullnameError();
-                setPhoneError();
-                SetpasswordError();
-                SetAdressError();
+                 boolean fullname=setFullnameError();
+                 boolean number= setPhoneError();
+                 boolean password=SetpasswordError();
+                 boolean adress= SetAdressError();
+                 if (fullname&&number&&password&&adress){
+                     
+                 }
 
                 backPanel.add(boxerror);
 
@@ -139,7 +142,8 @@ public class signIn {
         frame.setVisible(true);
     }
 
-    private void setPhoneError() {
+    private boolean setPhoneError() {
+        boolean flag=false;
         Font errorFont = new Font("font", Font.ITALIC, 10);
         SignUpValidator signUp=new SignUpValidator();
         String number=numberField.getText();
@@ -164,7 +168,7 @@ public class signIn {
                     boxerror.revalidate();
                     boxerror.repaint();
                 }
-
+               flag=true;
             }
             else {
                 JLabel numberError=new JLabel("This number is Invalid");
@@ -174,9 +178,13 @@ public class signIn {
                 boxerror.revalidate();
                 boxerror.repaint();
             }}
+        return flag;
     }
 
-    public void setFullnameError(){
+    public boolean setFullnameError(){
+        boolean nameflag=false;
+        boolean lastflag=false;
+        boolean mainflag=false;
         String name=firstNameField.getText();
         String last=lastNameField.getText();
         int namelen=name.length();
@@ -206,6 +214,9 @@ public class signIn {
                     boxerror.revalidate();
                     boxerror.repaint();
                 }
+                else {
+                    nameflag=true;
+                }
             }
             else {
                 JLabel error=new JLabel("Your firstname`s length must be between 3-12!");
@@ -233,6 +244,9 @@ public class signIn {
                     boxerror.revalidate();
                     boxerror.repaint();
                 }
+                else {
+                    lastflag=true;
+                }
             } else {
                 JLabel error = new JLabel("Your lastname`s length must be between 3-12!");
                 error.setBounds(65, 55, 350, 30);
@@ -242,11 +256,18 @@ public class signIn {
                 boxerror.repaint();
             }
         }
+        if(lastflag&&nameflag){
+            mainflag=true;
+        }
+        return mainflag;
     }
-    public void SetusernameError(){
-
+    public boolean SetusernameError(){
+        boolean flag=false;
+        return flag;
+           
     }
-    public void SetpasswordError(){
+    public boolean SetpasswordError(){
+        boolean flag=false;
         Font errorFont = new Font("font", Font.ITALIC, 10);
         SignUpValidator signUp=new SignUpValidator();
         String pass= passwordField.getText();
@@ -260,6 +281,7 @@ public class signIn {
             boxerror.add(numberError);
             boxerror.revalidate();
             boxerror.repaint();
+            
         }
         else {
             if (passwordlen) {
@@ -271,6 +293,9 @@ public class signIn {
                     boxerror.revalidate();
                     boxerror.repaint();
                 }
+               else {
+                   flag=true;
+                }
             } else {
                 JLabel error = new JLabel("Your password`s length must be between 8-25");
                 error.setBounds(65, 205, 350, 30);
@@ -280,8 +305,10 @@ public class signIn {
                 boxerror.repaint();
             }
         }
+        return flag;
     }
-    public void SetAdressError(){
+    public boolean SetAdressError(){
+        boolean flag=false;
         int addressLength=addressField.getText().length();
         Font errorFont = new Font("font", Font.ITALIC, 10);
         if(addressLength==0) {
@@ -292,6 +319,10 @@ public class signIn {
             boxerror.revalidate();
             boxerror.repaint();
         }
+        else{
+            flag=true;
+        }
+        return flag;
     }
 
 }
