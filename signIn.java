@@ -2,11 +2,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class signIn {
     private JFrame frame;
@@ -46,7 +44,6 @@ public class signIn {
 
         firstNameField.setBounds(200, 5, 250, 50);
         backPanel.add(firstNameField);
-        userInformation.add(firstNameField.getText());
 
         JLabel lastNameLabel = new JLabel("Last Name: ");
         lastNameLabel.setBounds(40, 60, 200, 50);
@@ -56,7 +53,6 @@ public class signIn {
 
         lastNameField.setBounds(200, 55, 250, 50);
         backPanel.add(lastNameField);
-        userInformation.add(lastNameField.getText());
 
         JLabel username = new JLabel("User Name: ");
         username.setBounds(40, 110, 200, 100);
@@ -66,7 +62,7 @@ public class signIn {
 
         usernameField.setBounds(200, 105, 250, 100);
         backPanel.add(usernameField);
-        userInformation.add(usernameField.getText());
+
 
         JLabel password = new JLabel("Password: ");
         password.setBounds(40, 210, 200, 100);
@@ -75,7 +71,7 @@ public class signIn {
 
         passwordField.setBounds(200, 205, 250, 100);
         backPanel.add(passwordField);
-        userInformation.add(passwordField.getText());
+
 
         JLabel phoneNumber = new JLabel("Phone Number: ");
         phoneNumber.setFont(font);
@@ -84,7 +80,6 @@ public class signIn {
 
         numberField.setBounds(200, 305, 250, 100);
         backPanel.add(numberField);
-        userInformation.add(numberField.getText());
 
         JLabel address = new JLabel("address: ");
         address.setFont(font);
@@ -94,7 +89,7 @@ public class signIn {
 
         addressField.setBounds(200, 405, 250, 100);
         backPanel.add(addressField);
-        userInformation.add(addressField.getText());
+
 
         JButton enter = new JButton("Enter");
         enter.setFont(font);
@@ -110,16 +105,58 @@ public class signIn {
                 boxerror.setLayout(null);
                 boxerror.setBackground(Color.lightGray);
                 boxerror.setBounds(400, 0, 300, 600);
-                 boolean fullname=setFullnameError();
-                 boolean number= setPhoneError();
-                 boolean password=SetpasswordError();
-                 boolean adress= SetAdressError();
-                 if (fullname&&number&&password&&adress){
-                     
-                 }
+                boolean fullname=setFullnameError();
+                boolean number= setPhoneError();
+                boolean password=SetpasswordError();
+                boolean adress= SetAdressError();
 
+                userInformation.add(firstNameField.getText());
+                userInformation.add(lastNameField.getText());
+                userInformation.add(usernameField.getText());
+                userInformation.add(passwordField.getText());
+                userInformation.add(numberField.getText());
+                userInformation.add(addressField.getText());
+                try {
+                    FileReader reader=new FileReader(file);
+                    BufferedReader bufferedReader=new BufferedReader(reader);
+                    String line=bufferedReader.readLine();
+                    while (line!=null){
+                        String[] splitInformation=line.split(":");
+                        if(usernameField.getText().equals(splitInformation[2])){
+                            
+                        }
+                        line = bufferedReader.readLine();
+
+                    }
+                } catch (FileNotFoundException ex) {
+                    throw new RuntimeException(ex);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+
+
+                if (fullname&&number&&password&&adress){
+                    FileWriter writer=null;
+                    try {
+                        writer = new FileWriter("information.txt");
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    BufferedWriter bufferedWriter=new BufferedWriter(writer);
+                    for (int i = 0; i < userInformation.size(); i++) {
+                        try {
+                            bufferedWriter.write(userInformation.get(i)+":");
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    }
+                    try {
+                        bufferedWriter.close();
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }
                 backPanel.add(boxerror);
-
             }
         });
         backPanel.add(enter);
@@ -168,7 +205,7 @@ public class signIn {
                     boxerror.revalidate();
                     boxerror.repaint();
                 }
-               flag=true;
+                flag=true;
             }
             else {
                 JLabel numberError=new JLabel("This number is Invalid");
@@ -264,7 +301,7 @@ public class signIn {
     public boolean SetusernameError(){
         boolean flag=false;
         return flag;
-           
+
     }
     public boolean SetpasswordError(){
         boolean flag=false;
@@ -281,7 +318,7 @@ public class signIn {
             boxerror.add(numberError);
             boxerror.revalidate();
             boxerror.repaint();
-            
+
         }
         else {
             if (passwordlen) {
@@ -293,8 +330,8 @@ public class signIn {
                     boxerror.revalidate();
                     boxerror.repaint();
                 }
-               else {
-                   flag=true;
+                else {
+                    flag=true;
                 }
             } else {
                 JLabel error = new JLabel("Your password`s length must be between 8-25");
@@ -326,4 +363,5 @@ public class signIn {
     }
 
 }
+
 
