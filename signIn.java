@@ -109,33 +109,15 @@ public class signIn {
                 boolean number= setPhoneError();
                 boolean password=SetpasswordError();
                 boolean adress= SetAdressError();
-
+                boolean username=SetusernameError();
                 userInformation.add(firstNameField.getText());
                 userInformation.add(lastNameField.getText());
                 userInformation.add(usernameField.getText());
                 userInformation.add(passwordField.getText());
                 userInformation.add(numberField.getText());
                 userInformation.add(addressField.getText());
-                try {
-                    FileReader reader=new FileReader(file);
-                    BufferedReader bufferedReader=new BufferedReader(reader);
-                    String line=bufferedReader.readLine();
-                    while (line!=null){
-                        String[] splitInformation=line.split(":");
-                        if(usernameField.getText().equals(splitInformation[2])){
-                            
-                        }
-                        line = bufferedReader.readLine();
 
-                    }
-                } catch (FileNotFoundException ex) {
-                    throw new RuntimeException(ex);
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-
-
-                if (fullname&&number&&password&&adress){
+                if (fullname&&number&&password&&adress&&username){
                     FileWriter writer=null;
                     try {
                         writer = new FileWriter("information.txt");
@@ -300,8 +282,53 @@ public class signIn {
     }
     public boolean SetusernameError(){
         boolean flag=false;
-        return flag;
+        Font errorFont = new Font("font", Font.ITALIC, 10);
+        SignUpValidator signUp=new SignUpValidator();
+        String user= usernameField.getText();
+        int userlen=user.length();
+        boolean userlength=signUp.usernamelength(userlen);
+        boolean usercorrectness=signUp.userNameCorrectness(user);
+        boolean isrepeated=signUp.usernamerepeat(user,file,usernameField);
+        if(userlen==0){
+            JLabel numberError=new JLabel("Please fill in the blank! ");
+            numberError.setBounds(65, 105, 350, 30);
+            numberError.setFont(errorFont);
+            boxerror.add(numberError);
+            boxerror.revalidate();
+            boxerror.repaint();
+        }
+        else {
+            if (userlength){
+                if(usercorrectness){
+                    if(isrepeated){
+                        JLabel numberError=new JLabel("This username has already taken! ");
+                        numberError.setBounds(65, 105, 350, 30);
+                        numberError.setFont(errorFont);
+                        boxerror.add(numberError);
+                        boxerror.revalidate();
+                        boxerror.repaint();
+                    }
+                    else {
+                        flag=true;
+                    }
 
+                }
+            }
+            else {
+                JLabel error = new JLabel("Your UserName`s length must be between 3-20!");
+                error.setBounds(65, 105, 350, 30);
+                error.setFont(errorFont);
+                boxerror.add(error);
+                boxerror.revalidate();
+                boxerror.repaint();
+            }
+
+
+
+        }
+
+
+      return flag;
     }
     public boolean SetpasswordError(){
         boolean flag=false;
@@ -363,5 +390,6 @@ public class signIn {
     }
 
 }
+
 
 
