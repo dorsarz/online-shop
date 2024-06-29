@@ -7,13 +7,13 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class Shop{
-      private String username;
+    private String username;
     private Frame frame;
     private File file;
     Shop(String username,Frame frame,File file){
         this.username=username;
-       this.frame=frame;
-       this.file=file;
+        this.frame=frame;
+        this.file=file;
     }
     public   void main() {
         SwingUtilities.invokeLater(() -> {
@@ -26,20 +26,20 @@ public class Shop{
             JPanel topPanel = new JPanel();
             JPanel shopBoxPanel=new JPanel();
 
-            shopBoxPanel.setLayout(null);
+//            shopBoxPanel.setLayout(null);
             JButton backButton=new JButton("Back");
-            backButton.setFont(font);
-            backButton.setBounds(470,700,100,50);
-            shopBoxPanel.add(backButton);
-            backButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    frame.remove(shopBoxPanel);
-                    frame.add(mainPanel);
-                    frame.repaint();
-                    shopBoxPanel.revalidate();
-                }
-            });
+//            backButton.setFont(font);
+//            backButton.setBounds(470,700,100,50);
+//            shopBoxPanel.add(backButton);
+//            backButton.addActionListener(new ActionListener() {
+//                @Override
+//                public void actionPerformed(ActionEvent e) {
+//                    frame.remove(shopBoxPanel);
+//                    frame.add(mainPanel);
+//                    frame.repaint();
+//                    shopBoxPanel.revalidate();
+//                }
+//            });
 
             topPanel.setBackground(Color.LIGHT_GRAY);
             JLabel title= new JLabel("let's shop crocs,it's good for your heart!");
@@ -105,9 +105,8 @@ public class Shop{
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     frame.remove(mainPanel);
-                    Profile profile=new Profile(frame,user,file);
-                    frame.repaint();
-                    frame.revalidate();
+                    Profile profile=new Profile(frame,file,username);
+                    profile.setprofile();
                 }
             });
             settingPanel.add(profileButton);
@@ -138,6 +137,15 @@ public class Shop{
         });
     }
 }
+
+
+
+
+
+
+
+
+
 
 
 
