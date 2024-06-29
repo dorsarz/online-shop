@@ -7,11 +7,13 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class Shop{
-    private  String[]user=new String[1000];
+      private String username;
+    private Frame frame;
     private File file;
-    Shop(String[]user,File file){
-        this.user=user;
-        this.file=file;
+    Shop(String username,Frame frame,File file){
+        this.username=username;
+       this.frame=frame;
+       this.file=file;
     }
     public   void main() {
         SwingUtilities.invokeLater(() -> {
