@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
+import java.io.*;
 
 public class Login {
     private JFrame frame;
@@ -54,13 +54,34 @@ public class Login {
         enterBut.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String[] users = new String[0];
                 Font errorFont = new Font("font", Font.ITALIC, 10);
                 String pass=passwordText.getText();
                 String username=usernameText.getText();
                 LoginValidator login=new LoginValidator();
-                boolean ispassCorrect=login.validPassword(pass,file,username);
-                if(ispassCorrect){
-                    Shop shop=new Shop();
+                boolean flag = false;
+                try {
+                    FileReader reader = new FileReader(file);
+                    BufferedReader bufferedReader = new BufferedReader(reader);
+                    String line = bufferedReader.readLine();
+                    while (line != null) {
+                        String[] splitInformation = line.split(":");
+                        if (username.equals(splitInformation[2])) {
+                            if (pass.equals(splitInformation[3])) {
+                                flag = true;
+                                users=splitInformation;
+                            }
+                        }
+                        line = bufferedReader.readLine();
+
+                    }
+                } catch (FileNotFoundException ex) {
+                    throw new RuntimeException(ex);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+                if(flag){
+                    Shop shop=new Shop(users,file);
                     frame.remove(panel);
                     shop.main();
                     frame.repaint();
