@@ -10,10 +10,10 @@ import java.security.spec.KeySpec;
 public class SignUpValidator {
     public boolean namelength(int name){
         int min=3;int max=12;
-            if(name >=min&& name <=max){
-                return true;
-            }
-           else {return false;}
+        if(name >=min&& name <=max){
+            return true;
+        }
+        else {return false;}
     }
 
     public boolean nameCorrectness(String name){
@@ -30,8 +30,6 @@ public class SignUpValidator {
         }
 
     }
-
-
     public boolean lastnamelength(int name){
         int min=3;int max=12;
         if(name >=min&& name<=max){
@@ -53,7 +51,7 @@ public class SignUpValidator {
         }
     }
     public boolean userNameCorrectness(String name){
-                return true;
+        return true;
     }
     public boolean usernamelength(int name){
         int min=3;int max=20;
@@ -82,10 +80,10 @@ public class SignUpValidator {
             throw new RuntimeException(ex);
         }
         if (flag){
-            return  true;
+            return  false;
         }
         else {
-            return false;
+            return true;
         }
     }
     public boolean passwordlength(int name){
@@ -135,11 +133,4 @@ public class SignUpValidator {
         }
         else {return false;}
     }
-
-
-
-
-
-
-
 }
