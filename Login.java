@@ -60,9 +60,9 @@ public class Login {
                 LoginValidator login=new LoginValidator();
                 boolean ispassCorrect=login.validPassword(pass,file,username);
                 if(ispassCorrect){
-                   Shop shop=new Shop();
+                   Shop shop=new Shop(username,frame,file);
                     frame.remove(panel);
-                   shop.main();
+                    shop.main();
                     frame.repaint();
                     frame.revalidate();
                 }
