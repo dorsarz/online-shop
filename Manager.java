@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 public class Manager extends JFrame {
     private JFrame frame;
@@ -9,6 +10,7 @@ public class Manager extends JFrame {
     public Manager(JFrame frame,JPanel mainPanel){
         this.frame=frame;
         this.mainPanel=mainPanel;
+
     }
     public void setFrame(){
         frame.revalidate();
@@ -54,27 +56,30 @@ public class Manager extends JFrame {
                 String username= passwordText.getText();
                 ManagerValidator managerValidator=new ManagerValidator();
                 boolean password=managerValidator.passwordValidate(pass);
-                boolean user=managerValidator.passwordValidate(username);
-                   if (password&&user){
+                boolean user=managerValidator.usernameValidate(username);
+                if (password&&user){
+                    ManagerPanel managerPanel=new ManagerPanel(frame,mainPanel);
+                    frame.remove(panel);
+                    managerPanel.addProduct();
 
-             }
-             else {
-                 if (!password){
-                     JLabel error=new JLabel("Your Password is wrong!");
-                     error.setBounds(200,280,300,80);
-                     panelBack.add(error);
-                     panelBack.revalidate();
-                     panelBack.repaint();
-                 }
-                 if ((!user)){
-                     JLabel error=new JLabel("Your Username is wrong!");
-                     error.setBounds(200,300,300,80);
-                     panelBack.add(error);
-                     panelBack.revalidate();
-                     panelBack.repaint();
-                 }
+                }
+                else {
+                    if (!password){
+                        JLabel error=new JLabel("Your Password is wrong!");
+                        error.setBounds(200,280,300,80);
+                        panelBack.add(error);
+                        panelBack.revalidate();
+                        panelBack.repaint();
+                    }
+                    if ((!user)){
+                        JLabel error=new JLabel("Your Username is wrong!");
+                        error.setBounds(200,300,300,80);
+                        panelBack.add(error);
+                        panelBack.revalidate();
+                        panelBack.repaint();
+                    }
 
-             }
+                }
             }
         });
         panelBack.add(enterBut);
@@ -93,10 +98,9 @@ public class Manager extends JFrame {
 
             }
         });
-
         panel.add(panelBack);
-       frame.setVisible(true);
-       frame.add(panel);
+        frame.setVisible(true);
+        frame.add(panel);
 
     }
 
