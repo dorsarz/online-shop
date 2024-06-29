@@ -2,9 +2,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
+import java.io.*;
+import java.util.ArrayList;
 
 public class Manager extends JFrame {
+    File product=new File("product.txt");
     private JFrame frame;
     private JPanel mainPanel;
     public Manager(JFrame frame,JPanel mainPanel){
@@ -58,9 +60,14 @@ public class Manager extends JFrame {
                 boolean password=managerValidator.passwordValidate(pass);
                 boolean user=managerValidator.usernameValidate(username);
                 if (password&&user){
-                    ManagerPanel managerPanel=new ManagerPanel(frame,mainPanel);
-                    frame.remove(panel);
+                    ManagerPanel managerPanel=new ManagerPanel(frame,mainPanel,product);
+                   frame.remove(panel);
                     managerPanel.addProduct();
+                    try {
+                        addbotton(product);
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
 
                 }
                 else {
@@ -91,6 +98,7 @@ public class Manager extends JFrame {
         backBut.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 frame.remove(panel);
                 frame.repaint();
                 frame.revalidate();
@@ -104,5 +112,20 @@ public class Manager extends JFrame {
 
     }
 
+    private void addbotton(File prodoct) throws IOException {
+        FileReader reader=new FileReader(product);
+        BufferedReader bufferedReader=new BufferedReader(reader);
+        String line=bufferedReader.readLine();
+        int i=0;
+        ArrayList<Object> button = new ArrayList<>();
+        while (line!=null){
+            String[] splitInformation=line.split(":");
 
-}
+            line = bufferedReader.readLine();
+
+        }
+
+    }
+
+
+    }
