@@ -9,10 +9,11 @@ public class LoginValidator {
             BufferedReader bufferedReader = new BufferedReader(reader);
             String line = bufferedReader.readLine();
             while (line != null) {
-                String[] splitInformation = line.split(":");
-                if (usernameField.equals(splitInformation[2])) {
 
-                    if (pass.equals(splitInformation[3])) {
+                String[] splitInformation = line.split(":");
+                if (usernameField.contains(splitInformation[2])) {
+
+                    if (pass.contains(splitInformation[3])) {
                         flag = true;
                     }
                 }
@@ -25,6 +26,5 @@ public class LoginValidator {
             throw new RuntimeException(ex);
         }
         return flag;
-
     }
 }
