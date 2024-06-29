@@ -52,24 +52,32 @@ public class ManagerPanel {
                 frame.remove(mainManagerPanel);
                 JPanel panel=new JPanel();
                 panel.setBounds(0,0,800,800);
-                panel.setLayout(new GridLayout(4,2));
+                panel.setLayout(new GridLayout(5,2));
                 JLabel nameLabel= new JLabel("name of product");
                 nameLabel.setPreferredSize(new Dimension(50,50));
                 panel.add(nameLabel);
                 JTextField nameField=new JTextField();
                 productInfo.add(nameField.getText());
-
                 panel.add(nameField);
+
                 JLabel priceLabel=new JLabel("price of product");
                 panel.add(priceLabel);
                 JTextField priceField=new JTextField();
                 productInfo.add(priceField.getText());
                 panel.add(priceField);
+
+                JLabel inventoryLabel=new JLabel("Inventory");
+                panel.add(inventoryLabel);
+                JTextField inventoryfield=new JTextField();
+                productInfo.add(inventoryfield.getText());
+                panel.add(inventoryfield);
+
                 JLabel iconLabel=new JLabel("Icon");
                 panel.add(iconLabel);
                 JTextField iconField=new JTextField();
                 productInfo.add(iconField.getText());
                 panel.add(iconField);
+
 
 
                 JButton enter=new JButton("Enter");
