@@ -121,7 +121,7 @@ public class signIn {
                 if (fullname&&number&&password&&adress&&username){
                     FileWriter writer=null;
                     try {
-                        writer = new FileWriter("information.txt");
+                        writer = new FileWriter("information.txt",true);
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
@@ -132,6 +132,11 @@ public class signIn {
                         } catch (IOException ex) {
                             throw new RuntimeException(ex);
                         }
+                    }
+                    try {
+                        bufferedWriter.write("\n");
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
                     }
                     try {
                         bufferedWriter.close();
@@ -329,7 +334,7 @@ public class signIn {
         }
 
 
-      return flag;
+        return flag;
     }
     public boolean SetpasswordError(){
         boolean flag=false;
@@ -391,6 +396,11 @@ public class signIn {
     }
 
 }
+
+
+
+
+
 
 
 
