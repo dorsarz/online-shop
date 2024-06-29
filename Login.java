@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.*;
+import java.io.File;
 
 public class Login {
     private JFrame frame;
@@ -29,7 +29,7 @@ public class Login {
 
         JPanel panelBack=new JPanel();
         panelBack.setLayout(null);
-        panelBack.setBounds(230,180,500,400);
+        panelBack.setBounds(230,180,650,400);
         panelBack.setBackground(Color.lightGray);
         JLabel usernameLable=new JLabel("Username :");
         JLabel passwordLable=new JLabel("Password :");
@@ -54,42 +54,21 @@ public class Login {
         enterBut.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String[] users = new String[0];
                 Font errorFont = new Font("font", Font.ITALIC, 10);
                 String pass=passwordText.getText();
                 String username=usernameText.getText();
                 LoginValidator login=new LoginValidator();
-                boolean flag = false;
-                try {
-                    FileReader reader = new FileReader(file);
-                    BufferedReader bufferedReader = new BufferedReader(reader);
-                    String line = bufferedReader.readLine();
-                    while (line != null) {
-                        String[] splitInformation = line.split(":");
-                        if (username.equals(splitInformation[2])) {
-                            if (pass.equals(splitInformation[3])) {
-                                flag = true;
-                                users=splitInformation;
-                            }
-                        }
-                        line = bufferedReader.readLine();
-
-                    }
-                } catch (FileNotFoundException ex) {
-                    throw new RuntimeException(ex);
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-                if(flag){
-                    Shop shop=new Shop(users,file);
+                boolean ispassCorrect=login.validPassword(pass,file,username);
+                if(ispassCorrect){
+                   Shop shop=new Shop();
                     frame.remove(panel);
-                    shop.main();
+                   shop.main();
                     frame.repaint();
                     frame.revalidate();
                 }
                 else {
                     JLabel error = new JLabel("Your password is wrong!");
-                    error.setBounds(289,173,200,30);
+                    error.setBounds(400,173,200,30);
                     error.setFont(errorFont);
                     panelBack.add(error);
                     panelBack.repaint();
