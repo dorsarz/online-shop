@@ -2,19 +2,22 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
+import java.io.*;
 import java.util.ArrayList;
 
 public class ManagerPanel {
-     private JFrame frame;
-     private JPanel mainPanel;
-     private JPanel mainManagerPanel=new JPanel();
-     private ArrayList<String> productInfo=new ArrayList<>();
-     public  ManagerPanel(JFrame frame,JPanel mainPanel){
+    File product;
+    private JFrame frame;
+    private JPanel mainPanel;
+    private JPanel mainManagerPanel=new JPanel();
+    private ArrayList<String> productInfo=new ArrayList<>();
+    public  ManagerPanel(JFrame frame,JPanel mainPanel,File product){
+        this.product=product;
         this.frame=frame;
         this.mainPanel=mainPanel;
     }
     public void addProduct(){
+
         frame.repaint();
         frame.revalidate();
         mainManagerPanel.setBounds(0,0,1000,1000);
@@ -44,26 +47,17 @@ public class ManagerPanel {
         addProduct.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+
                 frame.remove(mainManagerPanel);
                 JPanel panel=new JPanel();
                 panel.setBounds(0,0,800,800);
-                panel.setLayout(new GridLayout(3,2));
+                panel.setLayout(new GridLayout(4,2));
                 JLabel nameLabel= new JLabel("name of product");
                 nameLabel.setPreferredSize(new Dimension(50,50));
                 panel.add(nameLabel);
                 JTextField nameField=new JTextField();
-
-                if(nameField.equals("pink")){
-                    productInfo.add("pink.jpeg");
-                } else if (nameField.equals("lemon")) {
-                    productInfo.add("lemon.jpeg");
-                }else if (nameField.equals("mint")) {
-                    productInfo.add("lemon.jpeg");
-                } else if (nameField.equals("orange")) {
-                    productInfo.add("orange.jpeg");
-                } else if (nameField.equals("purple")) {
-                    productInfo.add("purple.jpeg");
-                }
+                productInfo.add(nameField.getText());
 
                 panel.add(nameField);
                 JLabel priceLabel=new JLabel("price of product");
@@ -71,11 +65,45 @@ public class ManagerPanel {
                 JTextField priceField=new JTextField();
                 productInfo.add(priceField.getText());
                 panel.add(priceField);
-                JLabel inventoryLabel=new JLabel("inventory of product");
-                panel.add(inventoryLabel);
-                JTextField inventoryField=new JTextField();
-                productInfo.add(inventoryField.getText());
-                panel.add(inventoryField);
+                JLabel iconLabel=new JLabel("Icon");
+                panel.add(iconLabel);
+                JTextField iconField=new JTextField();
+                productInfo.add(iconField.getText());
+                panel.add(iconField);
+
+
+                JButton enter=new JButton("Enter");
+                panel.add(enter);
+                enter.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        FileWriter writer=null;
+                        try {
+                            writer = new FileWriter("prodoct.txt",true);
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                        BufferedWriter bufferedWriter=new BufferedWriter(writer);
+                        for (int i = 0; i < productInfo.size(); i++) {
+                            try {
+                                bufferedWriter.write(productInfo.get(i)+":");
+                            } catch (IOException ex) {
+                                throw new RuntimeException(ex);
+                            }
+                        }
+                        try {
+                            bufferedWriter.write("\n");
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                        try {
+                            bufferedWriter.close();
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    }
+                });
+
 
                 frame.add(panel);
                 frame.repaint();
