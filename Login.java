@@ -62,7 +62,7 @@ public class Login {
                 if(ispassCorrect){
                    Shop shop=new Shop(username,frame,file);
                     frame.remove(panel);
-                    shop.main();
+                    shop.startShopping();
                     frame.repaint();
                     frame.revalidate();
                 }
