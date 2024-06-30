@@ -19,6 +19,7 @@ public class Shop {
         this.file=file;
     }
     public void startShopping() {
+        //search for username so if it dosn`n exist add one
         SwingUtilities.invokeLater(() -> {
             try {
                 FileWriter fileWriter=new FileWriter(shopFile,true);
