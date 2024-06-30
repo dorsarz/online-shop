@@ -6,6 +6,7 @@ import java.io.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class Shop {
     private String username;
@@ -19,7 +20,6 @@ public class Shop {
         this.file=file;
     }
     public void startShopping() {
-        //search for username so if it dosn`n exist add one
         SwingUtilities.invokeLater(() -> {
             try {
                 FileWriter fileWriter=new FileWriter(shopFile,true);
@@ -37,8 +37,8 @@ public class Shop {
                     line= reader.readLine();
                 }
                 if(!(flag)){
-                    writer.write(username+":");
                     writer.write("\n");
+                    writer.write(username+":");
                 }
                 writer.close();
                 reader.close();
@@ -53,6 +53,7 @@ public class Shop {
             JPanel mainPanel = new JPanel(new BorderLayout());
             JPanel topPanel = new JPanel();
             JPanel shopBoxPanel=new JPanel();
+            shopBoxPanel.setLayout(null);
 
 
             topPanel.setBackground(Color.LIGHT_GRAY);
@@ -76,7 +77,7 @@ public class Shop {
             JButton backButton=new JButton("Back");
             backButton.setFont(font);
             backButton.setBounds(470,700,100,50);
-        
+            firstPanel.add(label);
             firstPanel.add(backButton);
             firstPanel.add(shopButton1);
             scrollablePanel.add(firstProduct);
@@ -92,7 +93,6 @@ public class Shop {
             firstProduct.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    firstPanel.add(label);
                     frame.remove(mainPanel);
                     frame.add(firstPanel);
                     frame.repaint();
@@ -113,66 +113,14 @@ public class Shop {
                 }
             });
 
-          ImageIcon secondIcon=new ImageIcon("lemon.jpeg");
+            ImageIcon secondIcon=new ImageIcon("lemon.jpeg");
             JButton secondProduct=new JButton(secondIcon);
-            secondProduct.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    JLabel label=new JLabel("Classic lemon lemonade crocs "+"Price:1600$");
-                    label.setFont(font);
-                    label.setBounds(270,180,600,300);
-                    firstPanel.add(label);
-                    frame.remove(mainPanel);
-                    frame.add(firstPanel);
-                    frame.repaint();
-                    frame.revalidate();
-                }
-            });
             ImageIcon thirdIcon=new ImageIcon("mint.jpeg");
             JButton thirdProduct=new JButton(thirdIcon);
-            thirdProduct.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    JLabel label=new JLabel("Classic min lemonade crocs "+"Price:1900$");
-                    label.setFont(font);
-                    label.setBounds(270,180,600,300);
-                    firstPanel.add(label);
-                    frame.remove(mainPanel);
-                    frame.add(firstPanel);
-                    frame.repaint();
-                    frame.revalidate();
-                }
-            });
             ImageIcon fourthIcon=new ImageIcon("purple.jpeg");
             JButton fourthProduct=new JButton(fourthIcon);
-            fourthProduct.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    JLabel label=new JLabel("Classic purple lemonade crocs "+"Price:1800$");
-                    label.setFont(font);
-                    label.setBounds(270,180,600,300);
-                    firstPanel.add(label);
-                    frame.remove(mainPanel);
-                    frame.add(firstPanel);
-                    frame.repaint();
-                    frame.revalidate();
-                }
-            });
             ImageIcon fifthIcon=new ImageIcon("orange.jpeg");
             JButton fifthProduct=new JButton(fifthIcon);
-            fifthProduct.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    JLabel label=new JLabel("Classic lemon orange crocs "+"Price:1400$");
-                    label.setFont(font);
-                    label.setBounds(270,180,600,300);
-                    firstPanel.add(label);
-                    frame.remove(mainPanel);
-                    frame.add(firstPanel);
-                    frame.repaint();
-                    frame.revalidate();
-                }
-            });
 
 
             scrollablePanel.add(firstProduct);
@@ -203,6 +151,7 @@ public class Shop {
                     frame.add(shopBoxPanel);
                     frame.repaint();
                     frame.revalidate();
+
 
                 }
             });
@@ -335,14 +284,16 @@ public class Shop {
         BufferedReader bufferedReader=new BufferedReader(reader);
         FileWriter fileWriter=new FileWriter(shopFile,true);
         BufferedWriter bufferedWriter=new BufferedWriter(fileWriter);
-        String line = bufferedReader.readLine();
         ArrayList<String> usersArray=new ArrayList<>();
-        while (line!=null){
-            if(line.contains(username)){
+        Scanner scanner=new Scanner(shopFile);
+        String line = scanner.nextLine();
+        while (scanner.hasNext()){
+            line=scanner.nextLine();
+            if(line.contains(""+username)){
                 bufferedWriter.write(toBuy+":");
                 usersArray.add(toBuy);
             }
-            line=bufferedReader.readLine();
+
         }
         bufferedWriter.close();
         bufferedReader.close();
