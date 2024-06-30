@@ -75,7 +75,7 @@ public class Shop {
             JButton backButton=new JButton("Back");
             backButton.setFont(font);
             backButton.setBounds(470,700,100,50);
-            firstPanel.add(label);
+        
             firstPanel.add(backButton);
             firstPanel.add(shopButton1);
             scrollablePanel.add(firstProduct);
@@ -91,6 +91,7 @@ public class Shop {
             firstProduct.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    firstPanel.add(label);
                     frame.remove(mainPanel);
                     frame.add(firstPanel);
                     frame.repaint();
@@ -111,14 +112,66 @@ public class Shop {
                 }
             });
 
-            ImageIcon secondIcon=new ImageIcon("lemon.jpeg");
+          ImageIcon secondIcon=new ImageIcon("lemon.jpeg");
             JButton secondProduct=new JButton(secondIcon);
+            secondProduct.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    JLabel label=new JLabel("Classic lemon lemonade crocs "+"Price:1600$");
+                    label.setFont(font);
+                    label.setBounds(270,180,600,300);
+                    firstPanel.add(label);
+                    frame.remove(mainPanel);
+                    frame.add(firstPanel);
+                    frame.repaint();
+                    frame.revalidate();
+                }
+            });
             ImageIcon thirdIcon=new ImageIcon("mint.jpeg");
             JButton thirdProduct=new JButton(thirdIcon);
+            thirdProduct.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    JLabel label=new JLabel("Classic min lemonade crocs "+"Price:1900$");
+                    label.setFont(font);
+                    label.setBounds(270,180,600,300);
+                    firstPanel.add(label);
+                    frame.remove(mainPanel);
+                    frame.add(firstPanel);
+                    frame.repaint();
+                    frame.revalidate();
+                }
+            });
             ImageIcon fourthIcon=new ImageIcon("purple.jpeg");
             JButton fourthProduct=new JButton(fourthIcon);
+            fourthProduct.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    JLabel label=new JLabel("Classic purple lemonade crocs "+"Price:1800$");
+                    label.setFont(font);
+                    label.setBounds(270,180,600,300);
+                    firstPanel.add(label);
+                    frame.remove(mainPanel);
+                    frame.add(firstPanel);
+                    frame.repaint();
+                    frame.revalidate();
+                }
+            });
             ImageIcon fifthIcon=new ImageIcon("orange.jpeg");
             JButton fifthProduct=new JButton(fifthIcon);
+            fifthProduct.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    JLabel label=new JLabel("Classic lemon orange crocs "+"Price:1400$");
+                    label.setFont(font);
+                    label.setBounds(270,180,600,300);
+                    firstPanel.add(label);
+                    frame.remove(mainPanel);
+                    frame.add(firstPanel);
+                    frame.repaint();
+                    frame.revalidate();
+                }
+            });
 
 
             scrollablePanel.add(firstProduct);
