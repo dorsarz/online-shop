@@ -4,9 +4,3 @@ this code in java contains an online shop,you can sign up on it and log in as a 
 - you can change your password
 - you can add product to your shopping box
 - search for a specific product
-
-
-
-
-Uploading copy_C7ACF259-6990-4833-9057-D151AE8900B7.mov…
-
