@@ -147,10 +147,11 @@ public class Shop {
             shoppingBox.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    frame.remove(mainPanel);
-                    frame.add(shopBoxPanel);
-                    frame.repaint();
-                    frame.revalidate();
+                     try {
+                        shopingbox();
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
 
 
                 }
@@ -298,6 +299,27 @@ public class Shop {
         bufferedWriter.close();
         bufferedReader.close();
         return usersArray;
+    }
+       public void shopingbox() throws IOException {
+        JLabel label = new JLabel("Your purchases:");
+        label.setBounds(1300,50,300,150);
+        FileReader fileReader = new FileReader(shopFile);
+        BufferedReader reader = new BufferedReader(fileReader);
+        String line = reader.readLine();
+        JLabel label2 = null;
+        String[] splitInformation = line.split(":");
+        String shop=null;
+        while (line != null) {
+            if (line.contains(username)) {
+                label2=new JLabel(splitInformation+"crocses");
+            }
+            label.setBounds(1300,200,300,150);
+            shopBoxPanel.add(label2);
+            frame.remove(mainPanel);
+            frame.add(shopBoxPanel);
+            frame.repaint();
+            frame.revalidate();
+        }
     }
 }
 
