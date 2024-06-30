@@ -34,8 +34,8 @@ public class Shop{
                     line= reader.readLine();
                 }
                 if(!(flag)){
-                   writer.write(username+":");
-                   writer.write("\n");
+                    writer.write(username+":");
+                    writer.write("\n");
                 }
                 writer.close();
                 reader.close();
@@ -102,7 +102,7 @@ public class Shop{
                     try {
                         products=addToShopBox("pink");
                         JLabel doneShopping=new JLabel("this product successfully added to your shop box");
-                       doneShopping.setBounds(500,900,100,80);
+                        doneShopping.setBounds(500,900,100,80);
                         firstPanel.add(doneShopping);
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
@@ -150,8 +150,122 @@ public class Shop{
 
                 }
             });
-            JButton contactUs=new JButton("Contact with us");
-            settingPanel.add(contactUs);
+            JButton search=new JButton("Search");
+            settingPanel.add(search);
+            search.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    JPanel searchpanel=new JPanel();
+                    searchpanel.setLayout(null);
+                    searchpanel.setBounds(0,0,1000,1000);
+                    JTextField searchField=new JTextField("");
+                    searchField.setBounds(350,100,400,100);
+                    searchpanel.add(searchField);
+                    JButton enterbutt=new JButton("Enter");
+                    enterbutt.setBounds(800,100,200,50);
+                    enterbutt.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            String search=searchField.getText();
+                            if(search.contains("pink")){
+                                firstProduct.setBounds(300,400,300,300);
+                                firstProduct.addActionListener(new ActionListener() {
+                                    @Override
+                                    public void actionPerformed(ActionEvent e) {
+                                        frame.remove(searchpanel);
+                                        frame.repaint();
+                                        frame.revalidate();
+                                    }
+                                });
+                                searchpanel.add(firstProduct);
+                                frame.repaint();
+                                frame.revalidate();
+                            }
+                            else if (search.contains("lemon")){
+                                secondProduct.setBounds(300,400,300,300);
+                                secondProduct.addActionListener(new ActionListener() {
+                                    @Override
+                                    public void actionPerformed(ActionEvent e) {
+                                        frame.remove(searchpanel);
+                                        frame.repaint();
+                                        frame.revalidate();
+                                    }
+                                });
+                                searchpanel.add(secondProduct);
+                                frame.repaint();
+                                frame.revalidate();
+                            }
+                            else if (search.contains("orange")){
+                                fifthProduct.setBounds(300,400,300,300);
+                                fifthProduct.addActionListener(new ActionListener() {
+                                    @Override
+                                    public void actionPerformed(ActionEvent e) {
+                                        frame.remove(searchpanel);
+                                        frame.repaint();
+                                        frame.revalidate();
+                                    }
+                                });
+                                searchpanel.add(fifthProduct);
+                                frame.repaint();
+                                frame.revalidate();
+                            }
+                            else if (search.contains("minit")){
+                                thirdProduct.setBounds(300,400,300,300);
+                                thirdProduct.addActionListener(new ActionListener() {
+                                    @Override
+                                    public void actionPerformed(ActionEvent e) {
+                                        frame.remove(searchpanel);
+                                        frame.repaint();
+                                        frame.revalidate();
+                                    }
+                                });
+                                searchpanel.add(thirdProduct);
+                                frame.repaint();
+                                frame.revalidate();
+                            }
+                            else if (search.contains("purple")){
+                                fourthProduct.setBounds(300,400,300,300);
+                                fourthProduct.addActionListener(new ActionListener() {
+                                    @Override
+                                    public void actionPerformed(ActionEvent e) {
+                                        frame.remove(searchpanel);
+                                        frame.repaint();
+                                        frame.revalidate();
+                                    }
+                                });
+                                searchpanel.add(fourthProduct);
+                                frame.repaint();
+                                frame.revalidate();
+                            }
+
+                        }
+                    });
+                    searchpanel.add(enterbutt);
+                    frame.remove(mainPanel);
+                    frame.add(searchpanel);
+                    frame.repaint();
+                    frame.revalidate();
+
+                    JButton backsearch=new JButton("Back");
+                    backsearch.setBounds(800,155,200,50);
+                    backsearch.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            frame.remove(searchpanel);
+                            frame.add(mainPanel);
+                            frame.repaint();
+                            frame.revalidate();
+                        }
+                    });
+                    searchpanel.add(backsearch);
+
+
+
+                }
+
+
+            });
+
 
             JScrollPane scrollPane = new JScrollPane(scrollablePanel);
             scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
