@@ -15,6 +15,8 @@ public class Manager extends JFrame {
 
     }
     public void setFrame(){
+        // gui part of manager added here
+
         frame.revalidate();
         frame.repaint();
         JPanel panel=new JPanel();
@@ -59,16 +61,17 @@ public class Manager extends JFrame {
                 ManagerValidator managerValidator=new ManagerValidator();
                 boolean password=managerValidator.passwordValidate(pass);
                 boolean user=managerValidator.usernameValidate(username);
+
+                // check correctness of password and username then you can go to managing panel
                 if (password&&user){
-                    ManagerPanel managerPanel=new ManagerPanel(frame,mainPanel,product);
-                   frame.remove(panel);
+                    ManagerPanel managerPanel=new ManagerPanel(frame,mainPanel);
+                    frame.remove(panel);
                     managerPanel.addProduct();
                     try {
                         addbotton(product);
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
-
                 }
                 else {
                     if (!password){
@@ -90,7 +93,6 @@ public class Manager extends JFrame {
             }
         });
         panelBack.add(enterBut);
-
         JButton backBut=new JButton("Back");
         backBut.setBounds(75,250,100,30);
         backBut.setFont(font1);
@@ -111,9 +113,9 @@ public class Manager extends JFrame {
         frame.add(panel);
 
     }
-
+    // you can add product to shop panel from here
     private void addbotton(File prodoct) throws IOException {
-        FileReader reader=new FileReader(product);
+        FileReader reader=new FileReader(prodoct);
         BufferedReader bufferedReader=new BufferedReader(reader);
         String line=bufferedReader.readLine();
         int i=0;
@@ -122,10 +124,6 @@ public class Manager extends JFrame {
             String[] splitInformation=line.split(":");
 
             line = bufferedReader.readLine();
-
         }
-
     }
-
-
-    }
+}
