@@ -25,6 +25,7 @@ public class signIn {
         this.file=file;
     }
     public void signInGUI() throws IOException {
+        // gui stuff added here for sign up panel
         frame.repaint();
         frame.revalidate();
         Font font = new Font("font", Font.BOLD, 20);
@@ -106,6 +107,8 @@ public class signIn {
                 boxerror.setLayout(null);
                 boxerror.setBackground(Color.lightGray);
                 boxerror.setBounds(400, 0, 300, 600);
+
+                // checking user information correctness in here
                 boolean fullname=setFullnameError();
                 boolean number= setPhoneError();
                 boolean password=SetpasswordError();
@@ -143,6 +146,7 @@ public class signIn {
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
+
                 }
                 backPanel.add(boxerror);
             }
@@ -173,6 +177,8 @@ public class signIn {
         SignUpValidator signUp=new SignUpValidator();
         String number=numberField.getText();
         int numlength=number.length();
+
+        // connected to signup validator to checking the correctness and length and use if/else for each state
         boolean phonelength=signUp.phonelength(numlength);
         boolean phonecorrect=signUp.phonecorrectness(number);
         if(numlength==0){
@@ -215,6 +221,8 @@ public class signIn {
         int namelen=name.length();
         int lastlen=last.length();
         SignUpValidator signUp=new SignUpValidator();
+
+        // connected to signup validator to checking the correctness and length and use if/else for each state
         boolean namelength= signUp.namelength(namelen);
         boolean namecorrectness=signUp.nameCorrectness(name);
         boolean lastlength=signUp.lastnamelength(lastlen);
@@ -291,6 +299,7 @@ public class signIn {
         Font errorFont = new Font("font", Font.ITALIC, 10);
         SignUpValidator signUp=new SignUpValidator();
         String user= usernameField.getText();
+        // connected to signup validator to checking the correctness and length and use if/else for each state
         int userlen=user.length();
         boolean userlength=signUp.usernamelength(userlen);
         boolean usercorrectness=signUp.userNameCorrectness(user);
@@ -328,12 +337,7 @@ public class signIn {
                 boxerror.revalidate();
                 boxerror.repaint();
             }
-
-
-
         }
-
-
         return flag;
     }
     public boolean SetpasswordError(){
@@ -341,6 +345,7 @@ public class signIn {
         Font errorFont = new Font("font", Font.ITALIC, 10);
         SignUpValidator signUp=new SignUpValidator();
         String pass= passwordField.getText();
+        // connected to signup validator to checking the correctness and length and use if/else for each state
         int passlen=pass.length();
         boolean passwordlen=signUp.passwordlength(passlen);
         boolean passwordcorrect=signUp.passwordCorrectness(pass);
