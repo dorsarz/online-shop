@@ -28,6 +28,7 @@ public class Profile {
             FileReader reader = new FileReader(file);
             BufferedReader bufferedReader = new BufferedReader(reader);
             String line = bufferedReader.readLine();
+            // for personal information we read each line in file and using an array list to having them then write them in panel
             while (line != null) {
                 splitInformation = line.split(":");
                 if (username.contains(splitInformation[2])) {
@@ -69,6 +70,8 @@ public class Profile {
         JLabel walletfield = new JLabel("100");
         profilePanel.add(walletfield);
         JButton changepass = new JButton("Changepassword");
+
+        //TODO
 
 //        changepass.addActionListener(new ActionListener() {
 //            @Override
