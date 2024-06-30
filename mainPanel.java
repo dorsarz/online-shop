@@ -12,7 +12,7 @@ public class mainPanel extends JFrame{
         Dimension framesize=new Dimension(1000,1000);
         frame.setSize(framesize);
         JPanel mainPanel=new JPanel();
-        mainPanel.setBounds(0,0,1000,1000);
+        mainPanel.setSize(framesize);
         mainPanel.setLayout(null);
         mainPanel.setBackground(Color.lightGray);
         Font font=new Font("font",Font.BOLD,25);
@@ -22,6 +22,7 @@ public class mainPanel extends JFrame{
         welcomeText.setFont(font);
         mainPanel.add(welcomeText);
 
+        // add a new panel to log in a manager
         JButton managerButton=new JButton("LOG IN AS MANAGER");
         managerButton.setFont(font);
         managerButton.setBounds(340,250,300,100);
@@ -34,7 +35,7 @@ public class mainPanel extends JFrame{
                 manager.setFrame();
             }
         });
-
+        // add a new panel to log in a user
         JButton userButton=new JButton("LOG IN AS USER");
         userButton.setFont(font);
         userButton.setBounds(340,350,300,100);
@@ -48,7 +49,7 @@ public class mainPanel extends JFrame{
 
             }
         });
-
+        // add a new panel to signing up
         JButton signIn=new JButton("SIGN UP");
         signIn.setFont(font);
         signIn.setBounds(340,450,300,100);
@@ -66,8 +67,6 @@ public class mainPanel extends JFrame{
                 }
             }
         });
-
-
         frame.add(mainPanel);
         frame.setLayout(null);
         frame.setVisible(true);
