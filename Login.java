@@ -14,6 +14,7 @@ public class Login {
         this.file=file;
     }
     public void setLoginPanel(){
+        // gui staff added here
         frame.repaint();
         frame.revalidate();
         JPanel panel=new JPanel();
@@ -58,13 +59,13 @@ public class Login {
                 String pass=passwordText.getText();
                 String username=usernameText.getText();
                 LoginValidator login=new LoginValidator();
+
+                // using login validator class to check username and password then you can go to shop panel
                 boolean ispassCorrect=login.validPassword(pass,file,username);
                 if(ispassCorrect){
                    Shop shop=new Shop(username,frame,file);
                     frame.remove(panel);
                     shop.startShopping();
-                    frame.repaint();
-                    frame.revalidate();
                 }
                 else {
                     JLabel error = new JLabel("Your password is wrong!");
