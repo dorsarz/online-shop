@@ -7,7 +7,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Shop{
+public class Shop {
     private String username;
     private Frame frame;
     private File file;
@@ -27,6 +27,8 @@ public class Shop{
                 BufferedWriter writer=new BufferedWriter(fileWriter);
                 String line=reader.readLine();
                 Boolean flag=false;
+
+                // checking if user added to file or not
                 while (line!=null){
                     if(line.contains(username)){
                         flag=true;
@@ -42,8 +44,6 @@ public class Shop{
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-
-
             Font font=new Font("font",Font.BOLD,25);
             JFrame frame = new JFrame("online shop");
             frame.setSize(1000, 1000);
@@ -78,6 +78,7 @@ public class Shop{
             firstPanel.add(label);
             firstPanel.add(backButton);
             firstPanel.add(shopButton1);
+            scrollablePanel.add(firstProduct);
             backButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -109,6 +110,7 @@ public class Shop{
                     }
                 }
             });
+
             ImageIcon secondIcon=new ImageIcon("lemon.jpeg");
             JButton secondProduct=new JButton(secondIcon);
             ImageIcon thirdIcon=new ImageIcon("mint.jpeg");
@@ -167,6 +169,7 @@ public class Shop{
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             String search=searchField.getText();
+                            // for searching button we get the name of product of textField then compare it to every product
                             if(search.contains("pink")){
                                 firstProduct.setBounds(300,400,300,300);
                                 firstProduct.addActionListener(new ActionListener() {
@@ -258,15 +261,9 @@ public class Shop{
                         }
                     });
                     searchpanel.add(backsearch);
-
-
-
                 }
-
-
             });
-
-
+            // make panel scrollable
             JScrollPane scrollPane = new JScrollPane(scrollablePanel);
             scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
@@ -278,6 +275,7 @@ public class Shop{
             frame.setVisible(true);
         });
     }
+    // make a arrayList of products user has bought
     public ArrayList<String> addToShopBox(String toBuy) throws IOException {
         FileReader reader=new FileReader(shopFile);
         BufferedReader bufferedReader=new BufferedReader(reader);
@@ -297,6 +295,26 @@ public class Shop{
         return usersArray;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
